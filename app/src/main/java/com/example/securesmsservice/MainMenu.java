@@ -22,8 +22,8 @@ public class MainMenu extends AppCompatActivity {
 
 
     protected void sendSMSMessage() {
-        String phoneNo = txtphoneNo.getText().toString();
-        String message = txtMessage.getText().toString();
+        // String phoneNo = txtphoneNo.getText().toString();
+       // String message = txtMessage.getText().toString();
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.SEND_SMS)

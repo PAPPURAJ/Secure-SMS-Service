@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
-    SharedPreferences sp=getSharedPreferences("LoginInfo",MODE_PRIVATE);
+    SharedPreferences sp;
 
 
 
@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sp=getSharedPreferences("LoginInfo",MODE_PRIVATE);
     }
 
 
