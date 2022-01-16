@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_launcher_background"/>
+
+
+        <TextView
+            android:id="@+id/singleConversationIDTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="ID"/>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
