@@ -37,7 +37,7 @@ public class MainMenu extends AppCompatActivity {
         recyclerView=findViewById(R.id.conversationRecy);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ConversationAdapter(this,new SMS_System(this).getAllSms()));
+        recyclerView.setAdapter(new ConversationAdapter(this,new SMS_System(this).getConversation()));
         checkPermission();
 
 

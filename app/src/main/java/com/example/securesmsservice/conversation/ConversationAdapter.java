@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 public class ConversationAdapter  extends RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder> {
     private Context context;
-    private ArrayList<SMSData> arrayList;
+    private ArrayList<String> arrayList;
 
-    public ConversationAdapter(Context context, ArrayList<SMSData> arrayList) {
+    public ConversationAdapter(Context context, ArrayList<String> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -30,7 +30,7 @@ public class ConversationAdapter  extends RecyclerView.Adapter<ConversationAdapt
 
     @Override
     public void onBindViewHolder(@NonNull ConversationViewHolder holder, int position) {
-        holder._idTv.setText(arrayList.get(position).getBody());
+        holder._idTv.setText(arrayList.get(position));
     }
 
     @Override

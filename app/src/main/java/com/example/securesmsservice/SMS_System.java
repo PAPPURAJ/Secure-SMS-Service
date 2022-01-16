@@ -20,9 +20,7 @@ public class SMS_System {
     }
 
     public ArrayList<SMSData> getAllSms() {
-
         ArrayList<SMSData> smsData=new ArrayList<>();
-
         ContentResolver cr = context.getContentResolver();
         Cursor c = cr.query(Telephony.Sms.CONTENT_URI, null, null, null, null);
         int totalSMS = 0;
@@ -62,6 +60,27 @@ public class SMS_System {
 
         } else {
 
+        }
+        return smsData;
+    }
+
+
+    public ArrayList<String> getConversation() {
+        ArrayList<String> smsData=new ArrayList<>();
+        ContentResolver cr = context.getContentResolver();
+        Cursor c = cr.query(Telephony.Sms.CONTENT_URI, null, null, null, null);
+        int totalSMS = 0;
+        if (c != null) {
+            totalSMS = c.getCount();
+            if (c.moveToFirst()) {
+                for (int j = 0; j < totalSMS; j++) {
+                    String number = c.getString(c.getColumnIndexOrThrow(Telephony.Sms.ADDRESS));
+                    if(!smsData.contains(number))
+                        smsData.add(number);
+                    c.moveToNext();
+                }
+            }
+            c.close();
         }
         return smsData;
     }
