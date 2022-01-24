@@ -33,12 +33,19 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        checkPermission();
+
         setContentView(R.layout.activity_main_menu);
         recyclerView=findViewById(R.id.conversationRecy);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ConversationAdapter(this,new SMS_System(this).getConversation()));
-        checkPermission();
+
+        ArrayList<String> sms_system=new SMS_System(this).getConversation();
+
+
+        recyclerView.setAdapter(new ConversationAdapter(this,sms_system));
+
 
 
 

@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         sp=getSharedPreferences("LoginInfo",MODE_PRIVATE);
-        startActivity(new Intent(this, MainMenu.class));
+       // startActivity(new Intent(this, MainMenu.class));
     }
 
 

@@ -8,18 +8,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/ico"/>
 
 
         <TextView
             android:id="@+id/singleConversationIDTv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
             android:text="ID"/>
 
 
