@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.securesmsservice.conversation.SMSData;
+import com.example.securesmsservice.message.MessageData;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,8 +20,8 @@ public class SMS_System {
         this.context = context;
     }
 
-    public ArrayList<SMSData> getAllSms() {
-        ArrayList<SMSData> smsData=new ArrayList<>();
+    public ArrayList<MessageData> getAllSms(String num) {
+        ArrayList<MessageData> smsData=new ArrayList<>();
         ContentResolver cr = context.getContentResolver();
         Cursor c = cr.query(Telephony.Sms.CONTENT_URI, null, null, null, null);
         int totalSMS = 0;
@@ -33,24 +34,28 @@ public class SMS_System {
                     String number = c.getString(c.getColumnIndexOrThrow(Telephony.Sms.ADDRESS));
                     String body = c.getString(c.getColumnIndexOrThrow(Telephony.Sms.BODY));
                     Date dateFormat= new Date(Long.valueOf(smsDate));
+
+                    if(!num.equals(number))
+                        continue;
+
                     // Toast.makeText(this, ""+body, Toast.LENGTH_SHORT).show();
                     Log.e("===",body);
-                    String type = null;
+                    boolean type = true;
                     switch (Integer.parseInt(c.getString(c.getColumnIndexOrThrow(Telephony.Sms.TYPE)))) {
                         case Telephony.Sms.MESSAGE_TYPE_INBOX:
-                            type = "inbox";
+                            type = false;
                             break;
                         case Telephony.Sms.MESSAGE_TYPE_SENT:
-                            type = "sent";
+                            type = true;
                             break;
                         case Telephony.Sms.MESSAGE_TYPE_OUTBOX:
-                            type = "outbox";
+                            type = true;
                             break;
                         default:
                             break;
                     }
 
-                    smsData.add(new SMSData(smsDate,number,body,type));
+                    smsData.add(new MessageData(body,type));
 
                     c.moveToNext();
                 }

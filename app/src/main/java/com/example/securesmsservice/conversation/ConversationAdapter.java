@@ -1,6 +1,7 @@
 package com.example.securesmsservice.conversation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.securesmsservice.R;
+import com.example.securesmsservice.message.MainMessage;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,11 @@ public class ConversationAdapter  extends RecyclerView.Adapter<ConversationAdapt
     @Override
     public void onBindViewHolder(@NonNull ConversationViewHolder holder, int position) {
         holder._idTv.setText(arrayList.get(position));
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent=new Intent(context, MainMessage.class);
+            intent.putExtra("number",holder._idTv.getText().toString());
+            context.startActivity(intent);
+        });
     }
 
     @Override
