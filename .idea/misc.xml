@@ -8,6 +8,8 @@
         <entry key="app/src/main/res/layout/activity_main_message.xml" value="0.25769927536231885" />
         <entry key="app/src/main/res/layout/single_conversation.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/single_msg.xml" value="0.25769927536231885" />
+        <entry key="app/src/main/res/layout/single_receive.xml" value="0.26268115942028986" />
+        <entry key="app/src/main/res/layout/single_send.xml" value="0.26268115942028986" />
       </map>
     </option>
   </component>

@@ -27,7 +27,11 @@ public class MainMsgAdapter extends RecyclerView.Adapter<MainMsgAdapter.MainMsgH
     @Override
     public MainMsgHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MainMsgHolder mainMsgHolder;
-        View view=LayoutInflater.from(context).inflate(R.layout.single_msg,parent,false);
+        View view;
+        if(viewType==1)
+            view=LayoutInflater.from(context).inflate(R.layout.single_send,parent,false);
+        else
+            view=LayoutInflater.from(context).inflate(R.layout.single_receive,parent,false);
         mainMsgHolder=new MainMsgHolder(view);
         return mainMsgHolder;
     }
@@ -36,6 +40,11 @@ public class MainMsgAdapter extends RecyclerView.Adapter<MainMsgAdapter.MainMsgH
     public void onBindViewHolder(@NonNull MainMsgHolder holder, int position) {
 
         holder.textView.setText(arrayList.get(position).getMessage());
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+       return arrayList.get(position).isSend()?1:0;
     }
 
     @Override
