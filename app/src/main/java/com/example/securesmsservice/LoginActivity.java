@@ -16,14 +16,18 @@ import com.example.securesmsservice.conversation.MainMenu;
 
 public class LoginActivity extends AppCompatActivity {
 
-    SharedPreferences sp;
-
+    private SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         sp=getSharedPreferences("LoginInfo",MODE_PRIVATE);
-       startActivity(new Intent(this, MainMenu.class));
+
+        if(sp.getBoolean("login",false)){
+            startActivity(new Intent(this, MainMenu.class));
+            finish();
+        }
+
     }
 
 
@@ -39,7 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         Toast.makeText(getApplicationContext(),"Login successful!",Toast.LENGTH_LONG).show();
+        sp.edit().putBoolean("login",true).apply();
         startActivity(new Intent(this, MainMenu.class));
+        finish();
 
     }
 
