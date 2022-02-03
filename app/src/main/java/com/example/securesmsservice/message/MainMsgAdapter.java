@@ -12,15 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.securesmsservice.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainMsgAdapter extends RecyclerView.Adapter<MainMsgAdapter.MainMsgHolder> {
 
     private Context context;
     private ArrayList<MessageData> arrayList;
+    private RecyclerView recyclerView;
 
-    public MainMsgAdapter(Context context, ArrayList<MessageData> arrayList) {
+    public MainMsgAdapter(Context context, RecyclerView recyclerView,ArrayList<MessageData> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
+        this.recyclerView=recyclerView;
     }
 
     @NonNull
@@ -38,13 +41,20 @@ public class MainMsgAdapter extends RecyclerView.Adapter<MainMsgAdapter.MainMsgH
 
     @Override
     public void onBindViewHolder(@NonNull MainMsgHolder holder, int position) {
+        holder.textView.setText(arrayList.get(getRevPos(position)).getMessage());
+        recyclerView.smoothScrollToPosition(position);
+    }
 
-        holder.textView.setText(arrayList.get(position).getMessage());
+
+    void addData(MessageData msgData){
+        arrayList.add(msgData);
+        recyclerView.smoothScrollToPosition(arrayList.size()-1);
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
-       return arrayList.get(position).isSend()?1:0;
+       return arrayList.get(getRevPos(position)).isSend()?1:0;
     }
 
     @Override
@@ -59,5 +69,9 @@ public class MainMsgAdapter extends RecyclerView.Adapter<MainMsgAdapter.MainMsgH
             super(itemView);
             textView=itemView.findViewById(R.id.singleMsgTv);
         }
+    }
+
+    int getRevPos(int pos){
+        return pos;
     }
 }
