@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.19895833333333332" />
         <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.23684210526315788" />
         <entry key="app/src/main/res/layout/activity_main_message.xml" value="0.25769927536231885" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25905797101449274" />
         <entry key="app/src/main/res/layout/single_conversation.xml" value="0.24682971014492755" />
         <entry key="app/src/main/res/layout/single_msg.xml" value="0.25769927536231885" />
         <entry key="app/src/main/res/layout/single_receive.xml" value="0.26268115942028986" />

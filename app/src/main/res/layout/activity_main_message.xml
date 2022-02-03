@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context=".message.MainMessage">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.3"
+        android:scaleType="fitXY"
+        android:rotation="180"
+        android:src="@drawable/lay_back"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainMsgRecy"
         android:layout_width="match_parent"
@@ -29,7 +36,8 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:text=">"
             android:onClick="mainMsgSendClick"
             android:layout_weight="1"/>
