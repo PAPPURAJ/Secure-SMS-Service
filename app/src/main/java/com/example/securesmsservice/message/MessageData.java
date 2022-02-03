@@ -1,8 +1,8 @@
 package com.example.securesmsservice.message;
 
 public class MessageData {
-    String message;
-    boolean isSend;
+    private String message;
+    private boolean isSend;
 
     public MessageData(String message, boolean isSend) {
         this.message = message;
@@ -11,6 +11,10 @@ public class MessageData {
 
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public boolean isSend() {

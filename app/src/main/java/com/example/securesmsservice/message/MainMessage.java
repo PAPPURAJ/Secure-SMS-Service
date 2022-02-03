@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -28,10 +29,13 @@ public class MainMessage extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
     private ArrayList<MessageData> messageData=new ArrayList<>();
     private MainMsgAdapter mainMsgAdapter;
+    private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_message);
+        sp=getSharedPreferences("LoginInfo",MODE_PRIVATE);
         msgEt=findViewById(R.id.mainMsgEt);
         num=getIntent().getStringExtra("number");
         recyclerView=findViewById(R.id.mainMsgRecy);
@@ -88,11 +92,12 @@ public class MainMessage extends AppCompatActivity {
     }
 
     void sendMsg(){
+        String encrypt = AESUtils.encrypt(msg, sp.getString("key","")) ;
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(num, null, msg, null, null);
+        smsManager.sendTextMessage(num, null, encrypt,null, null);
         Toast.makeText(getApplicationContext(), "SMS sent.",
                 Toast.LENGTH_LONG).show();
-        mainMsgAdapter.addData(new MessageData(msg,true));
+        mainMsgAdapter.addData(new MessageData(encrypt,true));
         msgEt.setText("");
     }
 }

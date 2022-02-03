@@ -1,10 +1,17 @@
 package com.example.securesmsservice.message;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.provider.CalendarContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +50,38 @@ public class MainMsgAdapter extends RecyclerView.Adapter<MainMsgAdapter.MainMsgH
     public void onBindViewHolder(@NonNull MainMsgHolder holder, int position) {
         holder.textView.setText(arrayList.get(getRevPos(position)).getMessage());
         recyclerView.smoothScrollToPosition(position);
+        holder.itemView.setOnLongClickListener(view -> {
+
+            EditText inputEt=new EditText(context);
+            inputEt.setHint("Enter secret");
+
+            AlertDialog.Builder builder=new AlertDialog.Builder(context);
+            builder.setTitle("Recover message")
+                    .setView(inputEt)
+                    .setNegativeButton("Cancel",null)
+                    .setPositiveButton("Decrypt", (dialogInterface, i) -> {
+
+                        String decryptStr=inputEt.getText().toString();
+//                        if(decryptStr.equals(""))
+//                        {
+//                            Toast.makeText(context, "Input secret key!", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+                        arrayList.get(position).setMessage(AESUtils.decrypt(arrayList.get(position).getMessage(), decryptStr));
+                        if(arrayList.get(position).getMessage()==null){
+                            holder.textView.setTextColor(Color.parseColor("#FF0000"));
+                            holder.textView.setText("Parsing error!");
+                        }
+
+                        else{
+                            holder.textView.setText(arrayList.get(position).getMessage());
+                        }
+
+                        recyclerView.smoothScrollToPosition(position);
+                    }).create().show();
+
+            return true;
+        });
     }
 
 

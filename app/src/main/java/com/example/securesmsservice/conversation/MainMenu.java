@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Telephony;
@@ -21,11 +23,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.securesmsservice.LoginActivity;
 import com.example.securesmsservice.R;
 import com.example.securesmsservice.SMS_System;
+import com.example.securesmsservice.message.AESUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,6 +68,18 @@ public class MainMenu extends AppCompatActivity {
             sp.edit().putBoolean("login",false).apply();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
+        }else if(item.getItemId()==R.id.menu_secret){
+            EditText inputEt=new EditText(this);
+            inputEt.setHint("Enter secret");
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("Set Secret")
+                    .setView(inputEt)
+                    .setNegativeButton("Cancel",null)
+                    .setPositiveButton("Set", (dialogInterface, i) -> {
+                        String decryptStr=inputEt.getText().toString();
+                        sp.edit().putString("key",decryptStr).apply();
+                        Toast.makeText(this, "Secret set!", Toast.LENGTH_SHORT).show();
+                    }).create().show();
         }
         return true;
     }
